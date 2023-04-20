@@ -5,6 +5,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Home/HomeScreen';
 import { StatusBar } from 'expo-status-bar';
+import AsyncStorage from '@react-native-async-storage/async-storage';
 
 const Stack = createStackNavigator();
 
@@ -13,17 +14,21 @@ function LoginScreen({ navigation }) {
   const [password, setPassword] = React.useState("");
 
   const handleLogin = () => {
-    console.log("Email:", email);
-    console.log("Password:", password);
 
-    axios.post('https://relax-project.cloud/checkuser', {
-        id:608890,
+    axios.post('https://relax-project.cloud/login', {
         name:email,
         password: password
     })
     .then(function (response) {
-        console.log(response.data);
-        navigation.navigate('HomeScreen');
+        if(response.data.status == 'success'){
+          const iduser = String(response.data.id);
+          storeData(iduser,email,password);
+          alert("Đăng nhập thành công! ╰(*°▽°*)╯");
+          navigation.navigate('HomeScreen');
+        }
+        else{
+          alert("Đừng cố hack hệ thống!Vui lòng nhập cho đúng tên và mật khẩu trước đã 🤨🤨🤨");
+        }
     })
     .catch(function (error) {
         console.log(error);
@@ -41,7 +46,7 @@ function LoginScreen({ navigation }) {
         <View style={styles.inputView} >
           <TextInput  
             style={styles.inputText}
-            placeholder="Email..." 
+            placeholder="Tên Đăng Nhập..." 
             placeholderTextColor="#003f5c"
             onChangeText={text => setEmail(text)}/>
         </View>
@@ -49,12 +54,12 @@ function LoginScreen({ navigation }) {
           <TextInput  
             secureTextEntry
             style={styles.inputText}
-            placeholder="Password..." 
+            placeholder="Mật Khẩu" 
             placeholderTextColor="#003f5c"
             onChangeText={text => setPassword(text)}/>
         </View>
         <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
-          <Text style={styles.loginText}>LOGIN</Text>
+          <Text style={styles.loginText}>Đăng nhập</Text>
         </TouchableOpacity>
       </View>
     </View>
@@ -79,6 +84,15 @@ export default function App() {
   );
 }
 
+async function storeData(id,name,password) {
+  try {
+    AsyncStorage.setItem('id',id)
+    AsyncStorage.setItem('name',name)
+    AsyncStorage.setItem('password',password)
+  } catch (e) {
+    print(e)
+  }
+}
 const styles = StyleSheet.create({
   container: {
     flex: 1,

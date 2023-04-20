@@ -3,7 +3,6 @@ import React from "react";
 import SettingScreen from "./../Setting/SettingScreen";
 import ChatHomeScreen from "./../Chat/ChatHomeScreen"
 import RelaxHomeScreen from "./../Relax/RelaxHomeScreen"
-import LoginScreen from "./../Login/LoginScreen";
 import MenuScreen from "./MenuScreen";
 
 import { Ionicons } from '@expo/vector-icons';
