@@ -4,6 +4,7 @@ import SettingScreen from "./../Setting/SettingScreen";
 import ChatHomeScreen from "./../Chat/ChatHomeScreen"
 import RelaxHomeScreen from "./../Relax/RelaxHomeScreen"
 import LoginScreen from "./../Login/LoginScreen";
+import MenuScreen from "./MenuScreen";
 
 import { Ionicons } from '@expo/vector-icons';
 
@@ -27,10 +28,14 @@ export default function TabNavigator() {
                     else if (route.name === 'Cuộc trò chuyện') {
                         iconName = focused ? 'ios-chatbubbles' : 'ios-chatbubbles-outline';
                     }
+                    else if (route.name === 'Màn hình chính') {
+                        iconName = focused ? 'ios-home' : 'ios-home-outline';
+                    }
                     return <Ionicons name={iconName} size={size} color={color} />;
                 },
             })}
         >
+            <Tab.Screen name="Màn hình chính" component={MenuScreen} />
             <Tab.Screen name="Cuộc trò chuyện" component={ChatHomeScreen} />
             <Tab.Screen name="Trợ lý Relax" component={RelaxHomeScreen} />
             <Tab.Screen name="Cài đặt" component={SettingScreen} />

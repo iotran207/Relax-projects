@@ -73,7 +73,7 @@ export default function App() {
         />
         <Stack.Screen name="HomeScreen"
         component={HomeScreen} 
-        options={{headerLeft:null}}/>
+        options={{headerLeft:null,headerShown:false}}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
