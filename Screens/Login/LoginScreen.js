@@ -6,32 +6,38 @@ import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from '../Home/HomeScreen';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
+import { useFonts } from 'expo-font';
 
 const Stack = createStackNavigator();
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [loaded] = useFonts({
+    Bungee: require('../../assets/fonts/Bungee-Regular.ttf'),
+  });
 
   const handleLogin = () => {
 
-    axios.post('https://relax-project.cloud/login', {
-        name:email,
+    axios.post('https://relax-project.cloud/GetUser', {
+        id:email,
         password: password
     })
     .then(function (response) {
-        if(response.data.status == 'success'){
-          const iduser = String(response.data.id);
-          storeData(iduser,email,password);
-          alert("Đăng nhập thành công! ╰(*°▽°*)╯");
-          navigation.navigate('HomeScreen');
-        }
+        {/*if(response.data.status == 'success'){*/}
+        const iduser = String(response.data.id);
+        storeData(iduser,email,password);
+        alert("Đăng nhập thành công! ╰(*°▽°*)╯");
+        navigation.navigate('HomeScreen');
+        {/*}
         else{
           alert("Đừng cố hack hệ thống!Vui lòng nhập cho đúng tên và mật khẩu trước đã 🤨🤨🤨");
         }
+        */}
     })
     .catch(function (error) {
         console.log(error);
+        alert(error)
     });
   }
 
@@ -111,7 +117,8 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 50,
     color: '#fb5b5a',
-    marginBottom: 40
+    marginBottom: 40,
+    fontFamily: 'Bungee'
   },
   inputView: {
     width: '80%',
@@ -123,6 +130,7 @@ const styles = StyleSheet.create({
     padding: 20
   },
   inputText: {
+    fontFamily: 'Bungee',
     height: 50,
     color: 'black'
   },
@@ -141,6 +149,7 @@ const styles = StyleSheet.create({
     marginBottom: 10
   },
   loginText: {
+    fontFamily: 'Bungee',
     color: 'white'
   }
 });
