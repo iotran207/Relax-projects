@@ -5,7 +5,6 @@ import { TouchableOpacity } from 'react-native';
 import { useEffect } from 'react';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import { useState } from 'react';
-import { Image } from 'react-native';
 
 export default function SettingScreen({ navigation }) {
   const [hasPermission, setHasPermission] = useState(null);
@@ -37,42 +36,7 @@ export default function SettingScreen({ navigation }) {
         borderTopRightRadius: 20,
         marginTop: 20,
       }}>
-        <View style={{
-          flexDirection: 'row',
-        }}>
-        <Image source={require('./avatar.png')} style={{
-          width: 100,
-          height: 100,
-          marginTop: 20,
-          marginLeft: 20,
-          borderRadius: 20,
-        }}></Image>
-        <View style={{
-          marginTop: 25,
-          marginLeft: 20,
-        }}>
-          <Text style={{
-            fontSize: 15,
-            fontWeight: 'bold',
-            marginTop: 5,
-          }}>Họ và tên: {this.user_name}</Text>
-          <Text style={{
-            fontSize: 15,
-            fontWeight: 'bold',
-            marginTop: 5,
-          }}>Mã định danh cá nhân: {this.user_id}</Text>
-          <Text style={{
-            fontSize: 15,
-            fontWeight: 'bold',
-            marginTop: 5,
-          }}>Lớp: {this.user_class}</Text>
-          <Text style={{
-            fontSize: 15,
-            fontWeight: 'bold',
-            marginTop: 5,
-          }}>Tổ Chức: {this.user_org}</Text>
-        </View>
-        </View>
+        <Image source={require('./logo-full.png')}></Image>
       </View>
       <View>
         <Text style={{
@@ -90,14 +54,29 @@ export default function SettingScreen({ navigation }) {
           borderWidth:1,
         }}>
             <Text 
-              onPress={() => navigation.navigate('ProfileScreen')}
+              onPress={() => handleLogout()}
               style={{
               fontSize: 20,
               marginTop: 10,
               marginLeft: 10,
-            }}>Nhấn đây để xem thông tin cá nhân chi tiết                         >>></Text>
+            }}>Nhấn đây để xin quyền thông báo                                           >>></Text>
         </TouchableOpacity>
 
+        <TouchableOpacity 
+        style={{
+          height: 50,
+          backgroundColor: 'white',
+          marginTop: 10,
+          borderWidth:1,
+        }}>
+            <Text 
+              onPress={() => useEffect()}
+              style={{
+              fontSize: 20,
+              marginTop: 10,
+              marginLeft: 10,
+            }}>Nhấn đây để xin quyền truy cập camera                                >>></Text>
+        </TouchableOpacity>
       </View>
     </View>
   );

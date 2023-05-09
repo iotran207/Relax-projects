@@ -1,20 +1,36 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View, Button, TouchableOpacity} from 'react-native';
+import { StyleSheet, Text, View, Button, TouchableOpacity, Alert} from 'react-native';
 import { BarCodeScanner } from 'expo-barcode-scanner';
 import React, { useState, useEffect } from 'react';
 import { Image } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { ImageBackground } from 'react-native';
 import { useFonts } from 'expo-font';
+import axios from 'axios';
 
-
-export default function ScanQR() {
+export default function ScanQR({navigation}) {
   const [hasPermission, setHasPermission] = useState(null);
   const [scanned, setScanned] = useState(false);
   const [loaded] = useFonts({
     Bungee: require('../../assets/fonts/Bungee-Regular.ttf'),
   });
+  
+  function OnClickOne(){
+    navigation.navigate('Vi phạm')
+  }
+  
+  function OnClickTwo(){
+    navigation.navigate('Thông tin chi tiết')
+  }
 
+  function OnClickThree(){
+    if(this.data_role.includes("driver")){
+      navigation.navigate('Xe bus')
+    }
+    else{
+      alert("Bạn không phải là tài xế xe bus")
+    }
+  }
   useEffect(() => {
     (async () => {
       const { status } = await BarCodeScanner.requestPermissionsAsync();
@@ -24,15 +40,32 @@ export default function ScanQR() {
 
   const handleBarCodeScanned = ({ type, data }) => {
     setScanned(true);
-    console.log(data)
+    axios.post(url="http://18.141.160.222/GetUserFromID", {
+      "id": data
+    })
+    .then(function (response) {
+      data_id=response.data.message.id;
+      data_name=response.data.message.name;
+      data_birthday=response.data.message.birthday;
+      data_role=response.data.message.role;
+      data_org=response.data.message.org;
+      data_class=response.data.message.class;
+      data_city=response.data.message.city;
+      data_phone=response.data.message.phone;
+      alert("Cập nhật thông tin người dùng thành công")
+    })
+    .catch(function (error) {
+      alert(error)
+    });
   };
 
   if (hasPermission === null) {
-    return <Text>Requesting for camera permission</Text>;
+    return <Text>Yêu cầu truy cập camera</Text>;
   }
   if (hasPermission === false) {
-    return <Text>No access to camera</Text>;
+    return <Text>Không có quyền truy cập camera</Text>;
   }
+
 
   return (
     <View style={styles.container}>
@@ -72,12 +105,14 @@ export default function ScanQR() {
               </View>
               <View>
                 <Text></Text>
-                <Text style={styles.infomationText}>Họ và tên: Lê Trần Hoàng Lân</Text>
-                <Text style={styles.infomationText}>Mã định danh: 123456789</Text>
-                <Text style={styles.infomationText}>Ngày sinh: 01/01/2001</Text>
-                <Text style={styles.infomationText}>Đơn vị:10 tin</Text>
-                <Text style={styles.infomationText}>Trường THPT Chuyên Hà Tĩnh</Text>
-                <Text style={styles.infomationText}>Tỉnh:Hà Tĩnh</Text>
+                <View>
+                <Text style={styles.infomationText}>Họ và tên: {this.data_name}</Text>
+                </View>
+                <Text style={styles.infomationText}>Mã định danh: {this.data_id}</Text>
+                <Text style={styles.infomationText}>Ngày sinh: {this.data_birthday}</Text>
+                <Text style={styles.infomationText}>Đơn vị: {this.data_class}</Text>
+                <Text style={styles.infomationText}>Trường: {this.data_org}</Text>
+                <Text style={styles.infomationText}>Tỉnh: {this.data_city}</Text>
               </View>
             </View>
           </View>
@@ -86,24 +121,26 @@ export default function ScanQR() {
           }}>
             <View>
               <TouchableOpacity style={{
-                marginTop:30,
+                marginTop:60,
                 marginLeft:55,
                 height: 170,
                 width: 170,
                 backgroundColor:'#5d57ff',
                 borderRadius:10,
               }}>
-                <Text style={{
+                <Text 
+                  onPress={OnClickThree}
+                style={{
                   color:'white',
-                  fontSize:20,
+                  fontSize:23,
                   marginLeft:25,
                   fontFamily:'Bungee',
                   marginTop:65,
-                }}>⌚MUỘN GIỜ</Text>
+                }}>🚌 Đi xe</Text>
               </TouchableOpacity>
 
               <TouchableOpacity style={{
-                marginTop:30,
+                marginTop:70,
                 marginLeft:55,
                 height: 170,
                 width: 170,
@@ -119,37 +156,23 @@ export default function ScanQR() {
                   justifyContent: 'center',
                   marginTop:65,
                   color:'white',
-                }}>🤬 VI PHẠM</Text>
+                }}
+                onPress={OnClickOne}
+                >🤬 VI PHẠM</Text>
               </TouchableOpacity>
             </View>
 
             <View>
-            <TouchableOpacity style={{
-                marginTop:30,
-                marginLeft:55,
-                height: 170,
-                width: 170,
-                backgroundColor:'#EC2654',
-                borderRadius:10,
-              }}>
-                <Text style={{
-                  fontSize:20,
-                  marginLeft:22,
-                  alignItems: 'center',
-                  justifyContent: 'center',
-                  marginTop:65,
-                  color:'white',
-                  fontFamily: 'Bungee',
-                }}>✅ ĐIỂM DANH</Text>
-              </TouchableOpacity>
 
-              <TouchableOpacity style={{
+              <TouchableOpacity 
+               onPress={OnClickTwo}
+                style={{
                 fontFamily:'Bungee',
-                marginTop:30,
+                marginTop:60,
                 marginLeft:55,
                 height: 170,
                 width: 170,
-                backgroundColor:'#EC2654',
+                backgroundColor:'#FFB94F',
                 borderRadius:10,
               }}>
                 <Text style={{

@@ -7,12 +7,12 @@ export default function RelaxHomeScreen() {
   const [messages, setMessages] = useState([
     {
       _id: 20071115,
-      text: 'Chào bạn,mình có thể giúp gì cho cậu không 😉?',
+      text: 'hi,mình là relax bot, mình có thể giúp gì cho bạn?',
       createdAt: new Date(),
       user: {
         _id: 2,
         name: 'Chat Bot',
-        avatar: 'https://i.imgur.com/7k12EPD.png',
+        avatar: require('../Login/Logo.png'),
       },
     },
   ]);
@@ -21,17 +21,17 @@ export default function RelaxHomeScreen() {
     const isUser1 = newMessages[0].user._id === 1;
     if (isUser1) {
       const loadingMessage = {
-        _id: Math.round(Math.random() * 1000000),
+        _id: 11152007,
         text: 'Đang gõ . . .',
         createdAt: new Date(),
         user: {
           _id: 2,
           name: 'Chat Bot',
-          avatar: 'https://imgur.com/a/S4BNB4q'
+          avatar: require('../Login/Logo.png'),
         },
       };
       setMessages(previousMessages => GiftedChat.append(previousMessages, [loadingMessage, newMessages[0]]));
-    axios.post('http://relax-project.cloud/Assistant', {
+    axios.post('http://18.141.160.222/Assistant', {
       content: newMessages[0].text,
     })
     .then(function (response) {
@@ -44,7 +44,7 @@ export default function RelaxHomeScreen() {
         user: {
           _id: 2,
           name: 'Chat Bot',
-          avatar: 'https://imgur.com/a/S4BNB4q'
+          avatar: require('../Login/Logo.png'),
         },
       };
       setMessages(previousMessages => {

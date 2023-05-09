@@ -7,44 +7,73 @@ import HomeScreen from '../Home/HomeScreen';
 import { StatusBar } from 'expo-status-bar';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useFonts } from 'expo-font';
+import ScanQR from '../Scan/ScanQR';
+import ReasonScreen from '../Scan/Reason';
+import InfoScreen from '../Scan/InfoScreen';
+import * as Font from 'expo-font';
+import BusScreen from '../Scan/BusScreen';
+import ProfileScreen from '../Setting/Profile';
+import Profile from '../Home/Profile';
+import BusHome from '../Home/BusHome';
+import ProfileHome from '../Home/ProfileHome';
+import Reason from '../Home/ReasonHome';
+import QRgen from '../Home/QRgen';
+import InfoScreenHome from '../Home/InfoScreen';
 
 const Stack = createStackNavigator();
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const [loaded] = useFonts({
-    Bungee: require('../../assets/fonts/Bungee-Regular.ttf'),
-  });
+  const[fontLoaded, setFontLoaded] = React.useState(false);
 
   const handleLogin = () => {
-
-    axios.post('https://relax-project.cloud/GetUser', {
+    axios.post("http://18.141.160.222/Login", {
         id:email,
         password: password
-    })
+    },)
     .then(function (response) {
         {/*if(response.data.status == 'success'){*/}
-        const iduser = String(response.data.id);
-        storeData(iduser,email,password);
+        user_id = response.data.message.id;
+        user_name = response.data.message.name;
+        user_birthday = response.data.message.birthday;
+        user_role = response.data.message.role;
+        user_org = response.data.message.org;
+        user_class = response.data.message.class;
+        user_city = response.data.message.city;
+        user_car = response.data.message.car;
+        user_price = response.data.message.price;
+        user_phone = response.data.message.phone;
         alert("Đăng nhập thành công! ╰(*°▽°*)╯");
+        console.log(user_id)
         navigation.navigate('HomeScreen');
-        {/*}
+        /*}
         else{
           alert("Đừng cố hack hệ thống!Vui lòng nhập cho đúng tên và mật khẩu trước đã 🤨🤨🤨");
         }
-        */}
+        */
     })
     .catch(function (error) {
+        console.log(email,password)
         console.log(error);
         alert(error)
     });
   }
 
+  React.useEffect(() => {
+    Font.loadAsync({
+      "Bungee": require("./../../assets/fonts/Bungee-Regular.ttf"),
+    })
+    .then(() => {
+     setFontLoaded(true)
+    }) 
+  }, [])
+
+  if (!fontLoaded) return null
   return (
     <View style={{
       flex: 1,
-      backgroundColor: '#0086b3',
+      backgroundColor: '#088395',
     }}>
       <StatusBar style="auto" />
       <View style={styles.container}>
@@ -53,7 +82,7 @@ function LoginScreen({ navigation }) {
           <TextInput  
             style={styles.inputText}
             placeholder="Tên Đăng Nhập..." 
-            placeholderTextColor="#003f5c"
+            placeholderTextColor="#18587A"
             onChangeText={text => setEmail(text)}/>
         </View>
         <View style={styles.inputView} >
@@ -76,7 +105,7 @@ function LoginScreen({ navigation }) {
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="LoginScreen">
+      <Stack.Navigator initialRouteName="Đăng nhập">
         <Stack.Screen
           name="LoginScreen"
           component={LoginScreen}
@@ -85,19 +114,33 @@ export default function App() {
         <Stack.Screen name="HomeScreen"
         component={HomeScreen} 
         options={{headerLeft:null,headerShown:false}}/>
+        <Stack.Screen name="Vi phạm"
+        component={ReasonScreen}
+        />
+        <Stack.Screen name="ScanScreen"
+        component={ScanQR}
+        options={{headerLeft:null,headerShown:false}}/>
+        <Stack.Screen name="Thông tin chi tiết"
+        component={InfoScreen}/>
+        <Stack.Screen name="Xe bus"
+        component={BusScreen}/>
+        <Stack.Screen name="ProfileScreen"
+        component={ProfileScreen}/>
+        <Stack.Screen name="Tìm kiếm người dùng"
+        component={Profile}/>
+        <Stack.Screen name="Đi xe bus"
+        component={BusHome}/>
+        <Stack.Screen name="Thông tin"
+        component={ProfileHome}/>
+        <Stack.Screen name="Báo cáo vi phạm"
+        component={Reason}/>
+        <Stack.Screen name="Tạo mã QR"
+        component={QRgen}/>
+        <Stack.Screen name="Thông tin của tôi"
+        component={InfoScreenHome}/>
       </Stack.Navigator>
     </NavigationContainer>
   );
-}
-
-async function storeData(id,name,password) {
-  try {
-    AsyncStorage.setItem('id',id)
-    AsyncStorage.setItem('name',name)
-    AsyncStorage.setItem('password',password)
-  } catch (e) {
-    print(e)
-  }
 }
 const styles = StyleSheet.create({
   container: {

@@ -2,11 +2,12 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import React from "react";
 import SettingScreen from "./../Setting/SettingScreen";
 import ChatHomeScreen from "./../Chat/ChatHomeScreen";
-import ScanQR from "../Scan/ScanQR";
+import ScanQRscreen from "../Scan/ScanQR";
 import RelaxHomeScreen from "./../Relax/RelaxHomeScreen"
 import MenuScreen from "./MenuScreen";
 import { ImageBackground, View } from "react-native";
 import { Ionicons } from '@expo/vector-icons';
+
 
 const Tab = createBottomTabNavigator();
 
@@ -39,8 +40,7 @@ export default function TabNavigator() {
             })}
         >
             <Tab.Screen name="Màn hình chính" component={MenuScreen} />
-            <Tab.Screen name="Cuộc trò chuyện" component={ChatHomeScreen} />
-            <Tab.Screen name="Quét mã QR" component={ScanQR} />
+            <Tab.Screen name="Quét mã QR" component={ScanQRscreen} />
             <Tab.Screen name="Trợ lý Relax" component={RelaxHomeScreen} />
             <Tab.Screen name="Cài đặt" component={SettingScreen} />
         </Tab.Navigator>
