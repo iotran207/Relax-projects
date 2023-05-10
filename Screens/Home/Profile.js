@@ -82,7 +82,12 @@ export default function Profile({ navigation }) {
                         borderRadius: 20,
                         backgroundColor:'#5d57ff',
                     }}
-                    onPress={() => navigation.navigate('Đi xe bus')}
+                    onPress={() => {if(this.get_role.includes("driver")){
+                        navigation.navigate('Đi xe bus')
+                    }
+                                    else{
+                                        alert("Bạn không có quyền truy cập mục này")
+                                    }}}
                     ><Text style={{
                         fontSize: 30,
                         color: 'white',
@@ -118,7 +123,13 @@ export default function Profile({ navigation }) {
                         backgroundColor: 'red',
                         borderRadius: 20,
                     }}
-                        onPress={() => navigation.navigate('Báo cáo vi phạm')}
+                        onPress={() => {
+                            if(this.get_role.includes("admin")){
+                                navigation.navigate('Báo cáo vi phạm')
+                            }
+                            else{
+                                alert("Bạn không có quyền truy cập mục này")
+                            }}}
                     ><Text style={{
                         fontSize: 25,
                         color: 'white',

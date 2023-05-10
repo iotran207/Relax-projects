@@ -16,9 +16,13 @@ export default function ScanQR({navigation}) {
   });
   
   function OnClickOne(){
-    navigation.navigate('Vi phạm')
+    if(data_role.includes("admin")){
+      navigation.navigate('Vi phạm')
+    }
+    else{
+      alert("Bạn không có quyền truy cập mục này")
+    }
   }
-  
   function OnClickTwo(){
     navigation.navigate('Thông tin chi tiết')
   }

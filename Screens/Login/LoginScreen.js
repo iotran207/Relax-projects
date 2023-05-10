@@ -33,7 +33,7 @@ function LoginScreen({ navigation }) {
         password: password
     },)
     .then(function (response) {
-        {/*if(response.data.status == 'success'){*/}
+         if(response.data.status == 'success'){
         user_id = response.data.message.id;
         user_name = response.data.message.name;
         user_birthday = response.data.message.birthday;
@@ -46,12 +46,11 @@ function LoginScreen({ navigation }) {
         user_phone = response.data.message.phone;
         alert("Đăng nhập thành công! ╰(*°▽°*)╯");
         console.log(user_id)
-        navigation.navigate('HomeScreen');
-        /*}
+          navigation.navigate('HomeScreen');
+        }
         else{
           alert("Đừng cố hack hệ thống!Vui lòng nhập cho đúng tên và mật khẩu trước đã 🤨🤨🤨");
         }
-        */
     })
     .catch(function (error) {
         console.log(email,password)
@@ -83,7 +82,7 @@ function LoginScreen({ navigation }) {
             style={styles.inputText}
             placeholder="Tên Đăng Nhập..." 
             placeholderTextColor="#18587A"
-            onChangeText={text => setEmail(text)}/>
+            onChangeText={text => setEmail( text)}/>
         </View>
         <View style={styles.inputView} >
           <TextInput  
