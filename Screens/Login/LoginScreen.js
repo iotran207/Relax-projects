@@ -33,7 +33,7 @@ function LoginScreen({ navigation }) {
         password: password
     },)
     .then(function (response) {
-         if(response.data.status == 'success'){
+        if(response.data.status == 'success'){
         user_id = response.data.message.id;
         user_name = response.data.message.name;
         user_birthday = response.data.message.birthday;
