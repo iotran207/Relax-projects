@@ -43,20 +43,23 @@ Vì hầu như các thuật toán đều được xử lý trên máy chủ nên
 <h5>
 1.Cho người dùng thử nghiệm sản phẩm
 </h5>
-------------------------------------------------------------
+
 - Bước 1: Tải app Expo Go( đăng nhập nếu yêu cầu)
-- Bước 2: quét mã QR tại link sau: [Tại đây](https://tinyurl.com/2oscopyw)
+- Bước 2: quét mã QR tại link sau: 
+[Tại đây](https://tinyurl.com/2oscopyw)
 
 <h5>
 2.Cho nhà phát triển
 </h5>
-------------------------------------------------------------
+
 - Clone dự án và file máy chủ bằng lệnh
 `$ git clone https://github.com/iotran207/Relax-projects/`
+
 `$ git clone https://github.com/iotran207/Server`
 
 ### Tác giả
 github: [github](https://github.com/iotran207)
+
 facebook: [facebook](https://www.facebook.com/letranhoanglanvn)
 
 
