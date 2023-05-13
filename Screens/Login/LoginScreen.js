@@ -19,15 +19,42 @@ import ProfileHome from '../Home/ProfileHome';
 import Reason from '../Home/ReasonHome';
 import QRgen from '../Home/QRgen';
 import InfoScreenHome from '../Home/InfoScreen';
+import ChangePassword from '../Setting/ChangePassword';
+import ChangeRole from '../Home/ChangeRole';
+import Picture1 from '../Introduce/Picture1';
+import Picture2 from '../Introduce/Picture2';
+import Picture3 from '../Introduce/Picture3';
 
 const Stack = createStackNavigator();
 
 function LoginScreen({ navigation }) {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
-  const[fontLoaded, setFontLoaded] = React.useState(false);
+  const [fontLoaded, setFontLoaded] = React.useState(false);
 
+  const storeData = async (email,password) => {
+    try {
+      await AsyncStorage.setItem('store_id',email)
+      await AsyncStorage.setItem('store_password',password)
+    } catch (e) {
+      alert(e)
+    }
+  }
+  const getData = async () => {
+    DeviceID = await AsyncStorage.getItem('store_id')
+    DevicePass = await AsyncStorage.getItem('store_password')
+  }
+
+  getData()
   const handleLogin = () => {
+    storeData(email,password)
+    if(this.DeviceID != null){
+      setEmail(this.DeviceID)
+    }
+    if(this.DevicePass != null){
+      setPassword(this.DevicePass)
+    }
+    console.log(email,password)
     axios.post("http://18.141.160.222/Login", {
         id:email,
         password: password
@@ -46,7 +73,7 @@ function LoginScreen({ navigation }) {
         user_phone = response.data.message.phone;
         alert("Đăng nhập thành công! ╰(*°▽°*)╯");
         console.log(user_id)
-          navigation.navigate('HomeScreen');
+          navigation.navigate('Thông tin1');
         }
         else{
           alert("Đừng cố hack hệ thống!Vui lòng nhập cho đúng tên và mật khẩu trước đã 🤨🤨🤨");
@@ -70,6 +97,7 @@ function LoginScreen({ navigation }) {
 
   if (!fontLoaded) return null
   return (
+
     <View style={{
       flex: 1,
       backgroundColor: '#088395',
@@ -82,7 +110,7 @@ function LoginScreen({ navigation }) {
             style={styles.inputText}
             placeholder="Tên Đăng Nhập..." 
             placeholderTextColor="#18587A"
-            onChangeText={text => setEmail( text)}/>
+            onChangeText={text => setEmail( text)}>{this.DeviceID}</TextInput>
         </View>
         <View style={styles.inputView} >
           <TextInput  
@@ -90,7 +118,7 @@ function LoginScreen({ navigation }) {
             style={styles.inputText}
             placeholder="Mật Khẩu" 
             placeholderTextColor="#003f5c"
-            onChangeText={text => setPassword(text)}/>
+            onChangeText={text => setPassword(text)}>{this.DevicePass}</TextInput>
         </View>
         <TouchableOpacity style={styles.loginBtn} onPress={handleLogin}>
           <Text style={styles.loginText}>Đăng nhập</Text>
@@ -123,7 +151,7 @@ export default function App() {
         component={InfoScreen}/>
         <Stack.Screen name="Xe bus"
         component={BusScreen}/>
-        <Stack.Screen name="ProfileScreen"
+        <Stack.Screen name="Thông tin cá nhân của tôi"
         component={ProfileScreen}/>
         <Stack.Screen name="Tìm kiếm người dùng"
         component={Profile}/>
@@ -137,6 +165,19 @@ export default function App() {
         component={QRgen}/>
         <Stack.Screen name="Thông tin của tôi"
         component={InfoScreenHome}/>
+        <Stack.Screen name="Đổi mật khẩu"
+        component={ChangePassword}/>
+        <Stack.Screen name="Đổi vai trò"
+        component={ChangeRole}/>
+        <Stack.Screen name="Thông tin1"
+        options={{headerLeft:null,headerShown:false}}
+        component={Picture1}/>
+        <Stack.Screen name="Thông tin2"
+        options={{headerLeft:null,headerShown:false}}
+        component={Picture2}/>
+        <Stack.Screen name="Thông tin3"
+        options={{headerLeft:null,headerShown:false}}
+        component={Picture3}/>
       </Stack.Navigator>
     </NavigationContainer>
   );

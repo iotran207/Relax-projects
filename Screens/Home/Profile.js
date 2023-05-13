@@ -82,7 +82,7 @@ export default function Profile({ navigation }) {
                         borderRadius: 20,
                         backgroundColor:'#5d57ff',
                     }}
-                    onPress={() => {if(this.get_role.includes("driver")){
+                    onPress={() => {if(this.user_role.includes("driver")){
                         navigation.navigate('Đi xe bus')
                     }
                                     else{
@@ -114,6 +114,9 @@ export default function Profile({ navigation }) {
                         fontFamily: 'Bungee',
                     }}> 👑 Chi tiết</Text></TouchableOpacity>
                 </View>
+                <View style={{
+                    flexDirection: 'row',
+                }}>
                 <TouchableOpacity style={{
                         width: 170,
                         height: 170,
@@ -124,7 +127,7 @@ export default function Profile({ navigation }) {
                         borderRadius: 20,
                     }}
                         onPress={() => {
-                            if(this.get_role.includes("admin")){
+                            if(this.user_role.includes("admin")){
                                 navigation.navigate('Báo cáo vi phạm')
                             }
                             else{
@@ -137,6 +140,31 @@ export default function Profile({ navigation }) {
                         marginLeft: 15,
                         fontFamily: 'Bungee',
                     }}>⚡ Vi phạm</Text></TouchableOpacity>
+
+                    <TouchableOpacity style={{
+                        width: 170,
+                        height: 170,
+                        marginLeft:80,
+                        marginTop:50,
+                        backgroundColor: '#ff8c1a',
+                        borderRadius: 20,
+                    }}
+                        onPress={() => {
+                            if(this.user_role.includes("owner")){
+                                navigation.navigate('Đổi vai trò')
+                            }
+                            else{
+                                alert("Bạn không có quyền truy cập mục này")
+                            }}}
+                    ><Text style={{
+                        fontSize: 22,
+                        color: 'white',
+                        marginTop: 60,
+                        marginLeft: 15,
+                        fontFamily: 'Bungee',
+                    }}>🚨 đổi quyền</Text></TouchableOpacity>
+                    </View>
+                    
                 
             </View>
         </View>

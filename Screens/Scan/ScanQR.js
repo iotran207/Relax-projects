@@ -16,7 +16,7 @@ export default function ScanQR({navigation}) {
   });
   
   function OnClickOne(){
-    if(data_role.includes("admin")){
+    if(this.user_role.includes("admin")){
       navigation.navigate('Vi phạm')
     }
     else{
@@ -28,7 +28,8 @@ export default function ScanQR({navigation}) {
   }
 
   function OnClickThree(){
-    if(this.data_role.includes("driver")){
+    console.log(this.user_role)
+    if(this.user_role.includes("driver")){
       navigation.navigate('Xe bus')
     }
     else{

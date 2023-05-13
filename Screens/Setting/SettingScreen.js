@@ -90,12 +90,28 @@ export default function SettingScreen({ navigation }) {
           borderWidth:1,
         }}>
             <Text 
-              onPress={() => navigation.navigate('ProfileScreen')}
+              onPress={() => navigation.navigate('Thông tin cá nhân của tôi')}
               style={{
               fontSize: 20,
               marginTop: 10,
               marginLeft: 10,
             }}>Nhấn đây để xem thông tin cá nhân chi tiết                         >>></Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity 
+        style={{
+          height: 50,
+          backgroundColor: 'white',
+          marginTop: 10,
+          borderWidth:1,
+        }}>
+            <Text 
+              onPress={() => navigation.navigate('Đổi mật khẩu')}
+              style={{
+              fontSize: 20,
+              marginTop: 10,
+              marginLeft: 10,
+            }}>Nhấn đây để đổi mật khẩu                                                        >>></Text>
         </TouchableOpacity>
 
       </View>
