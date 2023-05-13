@@ -1,4 +1,7 @@
 # Giới thiệu
+
+![Image](https://github.com/iotran207/Relax-projects/blob/master/Screens/Setting/logo-full.png?raw=true)
+
 - Đây là sản phẩm cho cuộc thi tin học trẻ cấp tỉnh Hà Tĩnh thuộc lĩnh vực giáo dục,tự động hóa
 
 - Giáo dục có vai trò rất quan trọng đối với mỗi chúng ta, không chỉ giúp tạo ra một con người mà còn góp phần xây dựng, đổi mới xã hội. Trong vài năm trở lại đây, Trí tuệ nhân tạo (AI) đã tạo nên một cuộc cách mạng cho ngành giáo dục toàn cầu, khi nó dần giảm gánh nặng cho giáo viên, cá nhân hóa việc học tập của học sinh. Dù vậy ở Việt Nam, AI còn khá mới mẻ và chưa được ứng dụng quá nhiều. Với việc đem đến phần mềm “ Relax Project ”- Trợ lý công nghệ học tập chúng tôi kỳ vọng đưa ra những tính năng hữu ích nhất, tiện lợi nhất để ứng dụng vào việc giảng dạy và học tập của giáo viên cũng như học sinh.
@@ -21,8 +24,6 @@
 - Tích hợp chatbot phân tích tâm lý 
 - . . . (đang cập nhật)
 - Team sẽ phát triển các tính năng khác trong tương lai
-
-![Image](https://github.com/iotran207/Relax-projects/blob/master/Screens/Setting/logo-full.png?raw=true)
 
 ## Yêu cầu phần cứng
 ##### Về cấu hình máy chủ
