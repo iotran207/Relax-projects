@@ -9,6 +9,7 @@
 ## Một số hình ảnh về sản phẩm
 
 ![Image](https://github.com/iotran207/Relax-projects/blob/master/Image/1.jpg?raw=true)
+![Image](https://github.com/iotran207/Relax-projects/blob/master/Image/9.jpg?raw=true)
 ![Image](https://github.com/iotran207/Relax-projects/blob/master/Image/6.jpg?raw=true)
 ![Image](https://github.com/iotran207/Relax-projects/blob/master/Image/7.jpg?raw=true)
 ![Image](https://github.com/iotran207/Relax-projects/blob/master/Image/8.jpg?raw=true)
